@@ -22,27 +22,16 @@
 # SOFTWARE.
 ##################################################################################
 
-cmake_minimum_required(VERSION 3.16)
-project(nist-sts LANGUAGES CXX)
+find_package(Doxygen REQUIRED)
 
-# C++
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(DOXYFILE_IN ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in)
+set(DOXYFILE_OUT ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
 
-# Options
-option(BUILD_DOCS "Build library documentation" ON)
-option(BUILD_EXAMPLES "Build example executables" ON)
-option(BUILD_SHARED_LIBS "Build shared version of the library" OFF)
+configure_file(${DOXYFILE_IN} ${DOXYFILE_OUT} @ONLY)
 
-# Library source
-add_subdirectory(lib)
-
-# Library optional examples
-if(BUILD_EXAMPLES)
-    add_subdirectory(examples)
-endif()
-
-# Library documentation
-if(BUILD_DOCS)
-    add_subdirectory(doc)
-endif()
+add_custom_target(doc_doxygen
+    COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYFILE_OUT}
+    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+    COMMENT "Generando documentación con Doxygen..."
+    VERBATIM
+)
