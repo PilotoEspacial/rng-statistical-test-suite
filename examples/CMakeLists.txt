@@ -22,21 +22,13 @@
 # SOFTWARE.
 ##################################################################################
 
-cmake_minimum_required(VERSION 3.16)
-project(nist-sts LANGUAGES CXX)
+set(EXAMPLE "rng_test_example")
 
-# C++
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+# Create the example binary
+add_executable(${EXAMPLE} ${EXAMPLE}.cpp)
 
-# Options
-option(BUILD_EXAMPLES "Build example executables" ON)
-option(BUILD_SHARED_LIBS "Build shared version of the library" OFF)
-
-# Library source
-add_subdirectory(lib)
-
-# Library optional examples
-if(BUILD_EXAMPLES)
-    add_subdirectory(examples)
-endif()
+# Link with the library
+target_link_libraries(${EXAMPLE}
+   PRIVATE
+      NIST_STS_STATIC_LIB
+)
