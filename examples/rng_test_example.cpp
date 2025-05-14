@@ -35,11 +35,25 @@ generate_random ( size_t size )
    std::mt19937 gen ( rd () );
    std::uniform_int_distribution <> dist ( 0, 255 );
 
-   std::vector < uint8_t > vec ( size );
-   std::generate( vec.begin (), vec.end (),
+   std::vector < uint8_t > buffer ( size );
+   std::generate( buffer.begin (), buffer.end (),
       [&]() { return dist ( gen ); } );
 
-   return vec;
+   return buffer;
+}
+
+void
+save_file ( const std::string& file_name,
+            const std::string& file_data )
+{
+   std::ofstream file ( file_name );
+
+   if ( !file.is_open () )
+   {
+      throw std::runtime_error ( "Unable to write file \"" + file_name + "\"!" );
+   }
+
+   file << file_data << "\n";
 }
 
 void
@@ -65,11 +79,16 @@ main ( int, char** )
 
    auto test_vector = generate_random ( 2048 );
 
+   const std::string test_vector_file_name = "/tmp/random.hex";
+   save_file ( test_vector_file_name, hex_dump ( test_vector ) );
+
    std::cout << "Test results:" << std::endl;
    for ( auto& test : tests )
    {
       print_test_result ( test.name, test.run ( test_vector.data (), test_vector.size () ) );
    }
+
+   std::cout << "\nTest vector saved in: " << test_vector_file_name << std::endl;
 
    return EXIT_SUCCESS;
 }
