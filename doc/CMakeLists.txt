@@ -32,6 +32,6 @@ configure_file(${DOXYFILE_IN} ${DOXYFILE_OUT} @ONLY)
 add_custom_target(doc_doxygen
     COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYFILE_OUT}
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-    COMMENT "Generando documentación con Doxygen..."
+    COMMENT "Generating Doxygen documentation..."
     VERBATIM
 )
