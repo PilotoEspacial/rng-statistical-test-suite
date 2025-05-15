@@ -6,17 +6,12 @@
 
 #include <nist/statistical/tests.hpp>
 
+#include <cmath>
 #include <iostream>
 #include <filesystem>
 #include <fstream>
 #include <string_view>
 #include <vector>
-
-void
-print_help ( std::string_view program_name )
-{
-   std::cerr << "Usage: " << program_name << " <binary_file>" << std::endl;
-}
 
 std::vector < uint8_t >
 read_binary_file ( std::string file_path )
@@ -30,31 +25,17 @@ read_binary_file ( std::string file_path )
    return buffer;
 }
 
-struct Test
+void
+print_help ( std::string_view program_name )
 {
-   std::string name;
-   bool (*run)(const uint8_t [], size_t);
-};
+   std::cerr << "Usage: " << program_name << " <binary_file>" << std::endl;
+}
 
 void
-check_entropy ( std::vector < uint8_t > test_vector )
+print_result ( std::string test_name, bool test_result )
 {
-   using namespace nist::statistical::tests;
-   const std::vector < Test > sp_800_2_test_suite
-   {
-      { "Frequency (Monobit) Test", frequency_test }
-   };
-
-   std::cout << "Entropy Validation Result\n"
-                "-------------------------";
-
-   for ( auto& test : sp_800_2_test_suite )
-   {
-      bool test_result = test.run ( test_vector.data (), test_vector.size () );
-      std::cout << "\n   - " << test.name << ":\t" << std::boolalpha << test_result;
-   }
-
-   std::cout << std::endl;
+   std::string test_result_str = ( test_result ) ? "PASS" : "FAIL";
+   std::cout << "(" << test_result_str << ") " << test_name << "\n";
 }
 
 int
@@ -67,7 +48,22 @@ main ( int argc, char** argv )
       return EXIT_FAILURE;
    }
 
-   check_entropy ( read_binary_file ( argv [ 1 ] ) );
+   std::cout << "NIST SP 800-22 Rev. 1\n"
+                "---------------------\n"
+                "file: " << argv [ 1 ] <<
+                "\n---------------------\n";
+   
+   // Input test vector
+   auto test_vector = read_binary_file ( argv [ 1 ] );
+
+   // 01. Frequency (Monobit)
+   using namespace nist::statistical::tests;
+   print_result ( "Frequency (Monobit)", frequency ( test_vector.data (), test_vector.size () ) );
+
+   // 02. Frequency Test within a Block
+   size_t block_size = std::ceil ( test_vector.size () * 8 * 0.01 );
+   if ( block_size < 20 ) block_size = 20;
+   print_result ( "Frequency within a Block", frequency_within_a_block ( test_vector.data (), test_vector.size (), block_size ) );
 
    return EXIT_SUCCESS;
 }
