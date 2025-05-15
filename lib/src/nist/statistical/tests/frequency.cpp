@@ -96,8 +96,10 @@ namespace tests {
 
    } // namespace
 
+   //------------------------------------------------------------------------------
+
    bool
-   frequency ( const uint8_t input [], size_t input_length )
+   frequency_test ( const uint8_t input [], size_t input_length )
    {
       // n >= 100
       size_t total_bits = input_length * 8;
@@ -113,10 +115,12 @@ namespace tests {
       return p_value >= 0.01;
    }
 
+   //------------------------------------------------------------------------------
+
    bool
-   frequency_within_a_block ( const uint8_t input [], 
-                              size_t        input_length, 
-                              size_t        block_size )
+   frequency_test_within_a_block ( const uint8_t input [], 
+                                   size_t        input_length, 
+                                   size_t        block_size )
    {
       // n >= 100
       size_t total_bits = input_length * 8;
@@ -144,13 +148,13 @@ namespace tests {
             ones += bit;
          }
 
-         double pi = static_cast < double > ( ones ) / block_size;
+         double pi = (double) ones / block_size;
          chi_squared += ( pi - 0.5 ) * ( pi - 0.5 );
       }
 
       chi_squared *= 4.0 * block_size;
 
-      double p_value = gamma_q ( static_cast < double > ( num_blocks ) / 2.0, chi_squared / 2.0 );
+      double p_value = gamma_q ( (double) num_blocks / 2.0, chi_squared / 2.0 );
       return p_value >= 0.01;
    }
 

@@ -29,7 +29,7 @@ namespace tests {
     * @return True if the the p-value is 0.01 or greater.
     */
    bool
-   frequency ( const uint8_t input [], size_t input_length );
+   frequency_test ( const uint8_t input [], size_t input_length );
 
    /**
     * The purpose of this test is to determine whether the 
@@ -50,9 +50,9 @@ namespace tests {
     * @return True if the the p-value is 0.01 or greater.
     */
    bool
-   frequency_within_a_block ( const uint8_t input [], 
-                              size_t        input_length, 
-                              size_t        block_size );
+   frequency_test_within_a_block ( const uint8_t input [], 
+                                   size_t        input_length, 
+                                   size_t        block_size );
 
 } // tests
 } // statistical

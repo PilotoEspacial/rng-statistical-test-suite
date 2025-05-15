@@ -53,17 +53,24 @@ main ( int argc, char** argv )
                 "file: " << argv [ 1 ] <<
                 "\n---------------------\n";
    
+   using namespace nist::statistical::tests;
+
    // Input test vector
    auto test_vector = read_binary_file ( argv [ 1 ] );
 
    // 01. Frequency (Monobit)
-   using namespace nist::statistical::tests;
-   print_result ( "Frequency (Monobit)", frequency ( test_vector.data (), test_vector.size () ) );
+   print_result ( "Frequency (Monobit) Test", 
+      frequency_test ( test_vector.data (), test_vector.size () ) );
 
    // 02. Frequency Test within a Block
-   size_t block_size = std::ceil ( test_vector.size () * 8 * 0.01 );
+   size_t block_size = std::ceil ( test_vector.size () * 8 * 0.01 ) + 1;
    if ( block_size < 20 ) block_size = 20;
-   print_result ( "Frequency within a Block", frequency_within_a_block ( test_vector.data (), test_vector.size (), block_size ) );
+   print_result ( "Frequency Test within a Block", 
+      frequency_test_within_a_block ( test_vector.data (), test_vector.size (), block_size ) );
+
+   // 03. Runs Test
+   print_result ( "Runs Test", 
+      runs_test ( test_vector.data (), test_vector.size () ) );
 
    return EXIT_SUCCESS;
 }

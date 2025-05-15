@@ -8,5 +8,6 @@
 #define __NIST_STATISTICAL_TESTS_HPP_
 
 #include <nist/statistical/tests/frequency.hpp>
+#include <nist/statistical/tests/runs.hpp>
 
 #endif // __NIST_STATISTICAL_TESTS_HPP_
