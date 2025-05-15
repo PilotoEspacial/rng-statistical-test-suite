@@ -22,7 +22,7 @@
 # SOFTWARE.
 ##################################################################################
 
-set(EXAMPLE "rng_test_example")
+set(EXAMPLE "entropy_validator")
 
 # Create the example binary
 add_executable(${EXAMPLE} ${EXAMPLE}.cpp)
