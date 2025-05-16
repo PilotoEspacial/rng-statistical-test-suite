@@ -31,24 +31,24 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Options
 option(BUILD_DOCS "Build library documentation" OFF)
-option(BUILD_TESTS "Build test executables" OFF)
+option(BUILD_TESTS "Build unit tests" ON)
 option(BUILD_EXAMPLES "Build example executables" ON)
 option(BUILD_SHARED_LIBS "Build shared version of the library" OFF)
 
 # Library source
 add_subdirectory(lib)
 
-# Library optional tests
+# Library unit tests
 if(BUILD_TESTS)
     add_subdirectory(tests)
 endif()
 
-# Library optional examples
+# Library examples
 if(BUILD_EXAMPLES)
     add_subdirectory(examples)
 endif()
 
-# Library documentation
+# Library optional documentation (requires Doxygen)
 if(BUILD_DOCS)
     add_subdirectory(doc)
 endif()
