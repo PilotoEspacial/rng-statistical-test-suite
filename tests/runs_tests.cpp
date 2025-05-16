@@ -12,11 +12,25 @@
 TEST_CASE("Runs Test pass with valid input", "[runs]")
 {
    using namespace nist::statistical::tests;
-   REQUIRE ( runs_test ( valid_test_vector.data (), valid_test_vector.size () ) == true);
+   REQUIRE ( runs_test ( TEST_VECTOR_1.data (), TEST_VECTOR_1.size () ) == true);
 }
 
 TEST_CASE("Runs Test fails with invalid input", "[runs]")
 {
    using namespace nist::statistical::tests;
-   REQUIRE ( runs_test ( invalid_test_vector.data (), invalid_test_vector.size () ) == false);
+   REQUIRE ( runs_test ( TEST_VECTOR_2.data (), TEST_VECTOR_2.size () ) == false);
+}
+
+//--------------------------------------------------------------------------------
+
+TEST_CASE("Longest Run of Ones in a Block Test pass with valid input", "[runs]")
+{
+   using namespace nist::statistical::tests;
+   REQUIRE ( runs_test ( TEST_VECTOR_4.data (), TEST_VECTOR_4.size () ) == true);
+}
+
+TEST_CASE("Longest Run of Ones in a Block Test fails with invalid input", "[runs]")
+{
+   using namespace nist::statistical::tests;
+   REQUIRE ( runs_test ( TEST_VECTOR_5.data (), TEST_VECTOR_5.size () ) == false);
 }

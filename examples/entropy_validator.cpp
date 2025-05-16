@@ -38,6 +38,18 @@ print_result ( std::string test_name, bool test_result )
    std::cout << "(" << test_result_str << ") " << test_name << "\n";
 }
 
+bool
+valid_longest_run_of_ones_input_length ( size_t n )
+{
+   bool valid_input = false;
+
+   if ( n >= 128 && n < 6272 && ( n % 8 == 0 ) ) valid_input = true;
+   else if ( n >= 6272 && n < 750000 && ( n % 128 == 0) ) valid_input = true;
+   else if ( n >= 750000 && ( n % 10000 == 0 ) ) valid_input = true;
+
+   return valid_input;
+}
+
 int
 main ( int argc, char** argv )
 {
@@ -57,6 +69,7 @@ main ( int argc, char** argv )
 
    // Input test vector
    auto test_vector = read_binary_file ( argv [ 1 ] );
+   auto test_vector_bit_size = test_vector.size () * 8;
 
    // 01. Frequency (Monobit)
    print_result ( "Frequency (Monobit) Test", 
@@ -71,6 +84,13 @@ main ( int argc, char** argv )
    // 03. Runs Test
    print_result ( "Runs Test", 
       runs_test ( test_vector.data (), test_vector.size () ) );
+
+   // 04. Longest Run of Ones in a Block Test
+   if ( valid_longest_run_of_ones_input_length ( test_vector_bit_size ) )
+   {
+      print_result ( "Longest Run of Ones in a Block Test",
+         longest_run_of_ones_test ( test_vector.data (), test_vector.size () ) );
+   }
 
    return EXIT_SUCCESS;
 }
