@@ -18,6 +18,16 @@ namespace tests {
    namespace
    {
 
+      /**
+       * Computes the binary rank of a matrix using Gaussian elimination over GF(2).
+       *
+       * The matrix is assumed to be stored in a 1D vector in row-major order.
+       *
+       * @param matrix Flattened binary matrix (row-major), modified in-place during computation.
+       * @param num_rows Number of rows (M) of the matrix.
+       * @param num_columns Number of columns (Q) of the matrix.
+       * @return Binary rank of the matrix.
+       */
       size_t
       compute_rank ( std::vector < uint8_t >& matrix,
                      size_t                   num_rows, 
@@ -59,6 +69,17 @@ namespace tests {
          return rank;
       }
 
+      /**
+       * Fills a binary matrix from a given bit offset in the input bitstream.
+       *
+       * The matrix is stored in row-major order, and each bit is extracted 
+       * from the input byte array.
+       *
+       * @param input Input bitstream as a byte array.
+       * @param offset_bits Offset (in bits) from the beginning of the stream.
+       * @param matrix Output vector that will be filled with matrix_size bits.
+       * @param matrix_size Total number of bits (M * Q) to fill in the matrix.
+       */
       void
       fill_matrix ( const uint8_t            input [],
                     size_t                   offset_bits,
@@ -76,6 +97,22 @@ namespace tests {
          }
       }
 
+      /**
+       * Calculates the theoretical probabilities for the three possible matrix 
+       * rank cases.
+       *
+       * Probabilities are computed according to Appendix A of 
+       * the NIST SP800-22rev1a specification:
+       * - pi1: probability that the rank equals M
+       * - pi2: probability that the rank equals M - 1
+       * - pi3: probability that the rank is less than M - 1
+       *
+       * @param M Number of rows in the matrix.
+       * @param Q Number of columns in the matrix.
+       * @param pi1 Output probability for rank = M.
+       * @param pi2 Output probability for rank = M - 1.
+       * @param pi3 Output probability for rank < M - 1.
+       */
       void
       calculate_probabilities ( size_t  M,
                                 size_t  Q,
@@ -100,6 +137,20 @@ namespace tests {
          pi3 = 1.0 - pi1 - pi2;
       }
 
+      /**
+       * Computes the chi-squared statistic based on observed and expected 
+       * rank frequencies.
+       *
+       * @param Fm Observed frequency of matrices with full rank (M).
+       * @param Fm1 Observed frequency of matrices with rank = M - 1.
+       * @param Fr Observed frequency of matrices with rank < M - 1.
+       * @param pi1 Expected probability of rank = M.
+       * @param pi2 Expected probability of rank = M - 1.
+       * @param pi3 Expected probability of rank < M - 1.
+       * @param num_matrixes Total number of matrices processed.
+       * 
+       * @return Computed chi-squared value.
+       */
       double
       calculate_chi_squared ( double Fm,
                               double Fm1,
@@ -146,7 +197,7 @@ namespace tests {
 
       const size_t total_bits = input_length * 8;
       const size_t matrix_size = num_rows * num_columns;
-      
+
       if ( total_bits < 38 * matrix_size ) return false;
 
       const size_t num_matrixes = total_bits / matrix_size;
