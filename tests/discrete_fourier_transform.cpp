@@ -5,9 +5,9 @@
  ***************************************************/
 
 #include <catch2/catch_test_macros.hpp>
-#include <nist/statistical/tests/binary_matrix_rank.hpp>
+#include <nist/statistical/tests/discrete_fourier_transform.hpp>
 
-TEST_CASE("Binary Matrix Rank Test fails with invalid input", "[binary-matrix-rank]")
+TEST_CASE("Discrete Fourier Transform (Spectral) Test pass with valid input", "[spectral]")
 {
    const std::vector < uint8_t > test_vector =
    {
@@ -18,5 +18,5 @@ TEST_CASE("Binary Matrix Rank Test fails with invalid input", "[binary-matrix-ra
    };
 
    using namespace nist::statistical::tests;
-   REQUIRE ( binary_matrix_rank_test ( test_vector.data (), test_vector.size () ) == false);
+   REQUIRE ( discrete_fourier_transform_test ( test_vector.data (), test_vector.size () ) == true);
 }

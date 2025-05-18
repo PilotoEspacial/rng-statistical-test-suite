@@ -7,15 +7,15 @@ Implemented Tests:
 3. The Runs Test
 4. Tests for the Longest-Run-of-Ones in a Block
 5. The Binary Matrix Rank Test
+6. The Discrete Fourier Transform (Spectral) Test
 
 Tests to be implemented:
-1. The Discrete Fourier Transform (Spectral) Test
-2. The Non-overlapping Template Matching Test
-3. The Overlapping Template Matching Test
-4. Maurer's "Universal Statistical" Test
-5. The Linear Complexity Test
-6. The Serial Test
-7. The Approximate Entropy Test
-8. The Cumulative Sums (Cusums) Test
-9. The Random Excursions Test
-10. The Random Excursions Variant Test
+1. The Non-overlapping Template Matching Test
+2. The Overlapping Template Matching Test
+3. Maurer's "Universal Statistical" Test
+4. The Linear Complexity Test
+5. The Serial Test
+6. The Approximate Entropy Test
+7. The Cumulative Sums (Cusums) Test
+8. The Random Excursions Test
+9. The Random Excursions Variant Test

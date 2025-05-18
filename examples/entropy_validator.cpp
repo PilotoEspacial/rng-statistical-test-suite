@@ -81,5 +81,9 @@ main ( int argc, char** argv )
    print_result ( "Binary Matrix Rank Test",
       binary_matrix_rank_test ( test_vector.data (), test_vector.size () ) );
 
+   // 06. Discrete Fourier Transform (Spectral) Test
+   print_result ( "Discrete Fourier Transform (Spectral) Test",
+      discrete_fourier_transform_test ( test_vector.data (), test_vector.size () ) );
+
    return EXIT_SUCCESS;
 }
