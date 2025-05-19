@@ -19,10 +19,11 @@ namespace tests {
    namespace {
 
       /**
-       * @brief 
+       * Computes the Discrete Fourier Transform (DFT) of a real-valued input vector.
+       *
+       * @param X A vector of real-valued input samples.
        * 
-       * @param X
-       * @return std::vector < std::complex < double > > 
+       * @return The DFT output as a vector of complex numbers.
        */
       std::vector < std::complex < double > >
       dft ( const std::vector < double >& X )
