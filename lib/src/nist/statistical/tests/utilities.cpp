@@ -56,6 +56,15 @@ namespace utilities {
       return count;
    }
 
+   uint8_t
+   get_bit ( const uint8_t input [], size_t bit_index )
+   {
+      size_t byte_index = bit_index / 8;
+      size_t bit_offset = bit_index % 8;
+
+      return ( input [ byte_index ] >> ( 7 - bit_offset ) ) & 0x01;
+   }
+
    double
    igamc ( double a, double x )
    {

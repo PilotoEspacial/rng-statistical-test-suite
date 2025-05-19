@@ -15,8 +15,7 @@ namespace nist {
 namespace statistical {
 namespace tests {
 
-   namespace
-   {
+   namespace {
 
       /**
        * Computes the binary rank of a matrix using Gaussian elimination over GF(2).

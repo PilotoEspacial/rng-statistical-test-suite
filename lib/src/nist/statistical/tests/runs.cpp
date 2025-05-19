@@ -17,21 +17,6 @@ namespace nist {
 namespace statistical {
 namespace tests {
 
-   namespace {
-
-      uint8_t
-      get_bit ( const uint8_t input [], size_t bit_index )
-      {
-         size_t byte_index = bit_index / 8;
-         size_t bit_offset = bit_index % 8;
-
-         return ( input [ byte_index ] >> ( 7 - bit_offset ) ) & 0x01;
-      }
-
-   } // namespace
-
-   //------------------------------------------------------------------------------
-
    bool
    runs_test ( const uint8_t input [], size_t input_length )
    {
@@ -49,7 +34,7 @@ namespace tests {
       size_t Vn = 1;
       for ( size_t idx = 1; idx < total_bits; idx++ )
       {
-         if ( get_bit ( input, idx ) != get_bit ( input, idx - 1 ) ) Vn++;
+         if ( utilities::get_bit ( input, idx ) != utilities::get_bit ( input, idx - 1 ) ) Vn++;
       }
 
       double numerator = std::abs ( Vn - ( 2 * total_bits * pi * ( 1.0 - pi ) ) );
@@ -110,7 +95,7 @@ namespace tests {
          int max_run = 0, run = 0;
          for ( size_t j = 0; j < params.M; j++ )
          {
-            if ( get_bit ( input, i * params.M + j ) )
+            if ( utilities::get_bit ( input, i * params.M + j ) )
             {
                run++;
                if ( run > max_run ) max_run = run;

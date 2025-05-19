@@ -28,6 +28,17 @@ namespace utilities {
    count_ones ( const uint8_t input [], size_t input_length );
 
    /**
+    * This function returns a bit from a sequence of bytes.
+    * 
+    * @param input The byte sequence
+    * @param bit_index The index of the bit to return.
+    * 
+    * @return The representation of the bit (0, 1) as a byte.
+    */
+   uint8_t
+   get_bit ( const uint8_t input [], size_t bit_index );
+
+   /**
     * @brief Computes the complemented incomplete gamma function Q(a, x).
     *
     * This function evaluates the normalized upper incomplete gamma function:
