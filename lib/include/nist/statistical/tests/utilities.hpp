@@ -57,6 +57,17 @@ namespace utilities {
    double
    igamc ( double a, double x );
 
+   /**
+    * @brief Extracts individual bits from a byte array (MSB first).
+    * 
+    * @param input Pointer to input byte array.
+    * @param input_length Number of bytes in the array.
+    * @return std::vector < uint8_t > Vector of extracted bits (0 or 1).
+    */
+    
+   std::vector < uint8_t > 
+   extract_bits_from_bytes ( const uint8_t input[], size_t input_length );
+
 } // utilities
 } // tests
 } // statistical

@@ -9,6 +9,7 @@
 #include <bitset>
 #include <cmath>
 #include <limits>
+#include <vector>
 
 namespace nist {
 namespace statistical {
@@ -116,6 +117,23 @@ namespace utilities {
 
          return std::exp ( -x + a * std::log ( x ) - log_gamma ( a ) ) * h;
       }
+   }
+
+   std::vector < uint8_t > 
+   extract_bits_from_bytes ( const uint8_t input[], size_t input_length )
+   {
+      std::vector < uint8_t > bits;
+      bits.reserve ( input_length * 8 );
+
+      for ( size_t i = 0; i < input_length; ++i ) 
+      {
+         for ( int bit = 7; bit >= 0; --bit ) 
+         {
+            bits.push_back ( ( input [ i ] >> bit ) & 1 );
+         }
+      }
+
+      return bits;
    }
 
 } // utilities
