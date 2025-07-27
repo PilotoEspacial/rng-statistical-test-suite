@@ -53,7 +53,7 @@ namespace {
             {
                 std::vector < uint8_t > temp = c;
                 int shift = i - m;
-                for ( int j = 0; j < n - shift; ++j)
+                for ( int j = 0; j < n - shift; ++j )
                     c [ shift + j ] ^= b [ j ];
 
                 if ( L <= i / 2 ) 
