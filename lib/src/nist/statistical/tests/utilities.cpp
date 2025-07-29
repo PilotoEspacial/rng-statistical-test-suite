@@ -9,7 +9,6 @@
 #include <bitset>
 #include <cmath>
 #include <limits>
-#include <vector>
 
 namespace nist {
 namespace statistical {
@@ -131,7 +130,7 @@ namespace utilities {
       while ( ptr < end ) 
       {
          uint8_t byte = *ptr++;
-         
+
          for ( int bit = 7; bit >= 0; --bit ) 
          {
             bits.emplace_back ( ( byte >> bit ) & 0x01 );

@@ -9,6 +9,7 @@
 
 #include <cinttypes>
 #include <cstddef>
+#include <vector>
 
 namespace nist {
 namespace statistical {
