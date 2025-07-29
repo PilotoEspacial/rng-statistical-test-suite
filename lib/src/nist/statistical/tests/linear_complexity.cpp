@@ -80,7 +80,7 @@ namespace {
         size_t n = bits.size ();
         size_t N = n / M;
 
-        if ( N == 0 ) return false; // Not enough blocks
+        if ( N < 200 ) return false; // Not enough blocks
 
         double mu = M / 2.0 + ( 9.0 + std::pow ( -1.0, M + 1 ) ) / 36.0;
         double sigma2 = M / 9.0 + ( 2.0 / 9.0 ) * std::pow ( -1.0, M + 1 );

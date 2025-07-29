@@ -119,17 +119,22 @@ namespace utilities {
       }
    }
 
-   std::vector < uint8_t > 
-   extract_bits_from_bytes ( const uint8_t input[], size_t input_length )
+   std::vector < uint8_t >
+   extract_bits_from_bytes(const uint8_t* input, size_t input_length) 
    {
       std::vector < uint8_t > bits;
       bits.reserve ( input_length * 8 );
 
-      for ( size_t i = 0; i < input_length; ++i ) 
+      const uint8_t* ptr = input;
+      const uint8_t* end = input + input_length;
+
+      while ( ptr < end ) 
       {
+         uint8_t byte = *ptr++;
+         
          for ( int bit = 7; bit >= 0; --bit ) 
          {
-            bits.push_back ( ( input [ i ] >> bit ) & 1 );
+            bits.emplace_back ( ( byte >> bit ) & 0x01 );
          }
       }
 

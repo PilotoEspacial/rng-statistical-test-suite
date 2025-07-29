@@ -85,5 +85,10 @@ main ( int argc, char** argv )
    print_result ( "Discrete Fourier Transform (Spectral) Test",
       discrete_fourier_transform_test ( test_vector.data (), test_vector.size () ) );
 
+   // 07. Linear Complexity Test ( with minimum block size)
+   size_t block_size_linear_complexity = 256;  
+   print_result ( "Linear Complexity Test",
+      linear_complexity_test ( test_vector.data (), test_vector.size (), block_size_linear_complexity ) );
+
    return EXIT_SUCCESS;
 }

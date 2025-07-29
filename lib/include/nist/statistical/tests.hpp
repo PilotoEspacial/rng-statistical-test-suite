@@ -11,5 +11,6 @@
 #include <nist/statistical/tests/discrete_fourier_transform.hpp>
 #include <nist/statistical/tests/frequency.hpp>
 #include <nist/statistical/tests/runs.hpp>
+#include <nist/statistical/tests/linear_complexity.hpp>
 
 #endif // __NIST_STATISTICAL_TESTS_HPP_
